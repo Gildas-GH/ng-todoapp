@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr" ng-app="app">
+    <head>
+        <meta charset="utf-8" />
+        <title>Todo App - Ecobosto</title>  
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="apple-mobile-web-app-title" content="TodoApp">
+        <meta name="application-name" content="TodoApp">
+        <meta name="msapplication-TileColor" content="#b71c1c">
+        <meta name="theme-color" content="#b71c1c">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta property="og:locale" content="fr_fr">
+
+        <link type="text/css" rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.min.css" />
+        <link type="text/css" rel="stylesheet" href="style/style.css" />
+
+    </head>
+    
+    <body class="full">
+        <div class="maxHeight" ng-view></div>
+        
+        <script type="text/javascript" src="../node_modules/angular/angular.min.js"></script>
+        <script type="text/javascript" src="../node_modules/angular-route/angular-route.min.js"></script>
+        <script type="text/javascript" src="../node_modules/angular-long-press/angular-long-press.js"></script>
+        <script type="text/javascript" src="../node_modules/angular-cookies/angular-cookies.min.js"></script>
+        <script type="text/javascript" src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
+
+        <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/controllers/listController.js"></script>
+        <script type="text/javascript" src="js/controllers/addController.js"></script>
+
+    </body>
+
+</html>

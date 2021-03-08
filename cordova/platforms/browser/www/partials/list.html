@@ -1,0 +1,83 @@
+<!-- 
+    Liste des taches
+    list.html
+ -->
+
+<!-- Header -->
+<nav class="nav light-blue">
+    <a class="right text modal-trigger" ng-click="colorMenu()">
+        <i class="material-icons">filter_list</i>
+    </a>
+    <a class="brand-logo left text" href="#">Todo List</a>
+</nav>
+
+<!-- Modal choix d'une couleur -->
+<div id="colorMenuB" class="modal modal-color">
+    <div class="modal-content">
+        <h4>Choisissez une couleur</h4>
+        <button class="btn black-text" ng-click="setCouleur(couleur);"
+                ng-repeat="couleur in couleurs"
+                style="margin: 2px;height: 32px; background-color:{{couleur}}">
+            <i class="material-icons smallIcon" ng-if="tmpCouleur==couleur">done</i>
+        </button>
+    </div>
+    <div class="modal-footer">
+        <a ng-click="colorMenu()" class="modal-close waves-effect waves-blue btn-flat">Ok</a>
+        <a ng-click="setCouleur(null); colorMenu();" class="modal-close waves-effect waves-blue btn-flat">Réinitialiser</a>
+    </div>
+</div>
+
+<!-- Modal action sur une tache -->
+<div id="colorMenuB" class="modal modal-action">
+    <div class="modal-content">
+        <h4>Que voulez-vous faire ?</h4>
+
+        <button class="btn white black-text" ng-click="modify()" style="width: 100%">Modifier</button>
+        <button class="btn white black-text" ng-click="remove()" style="width: 100%">Supprimer</button>
+        <a ng-if="url">
+            <button class="btn white black-text" ng-click="openUrl()" style="width: 100%">Ouvrir l'URL</button>
+        </a>
+    </div>
+</div>
+
+<div class="container">
+    <h3 class="light-blue-text center">Todo List</h3>
+    <p class="center">
+        Delete task : Swipe<br>
+        Finish task : Short click<br>
+        More actions : Long click
+    </p>
+
+    <!-- Tâches -->
+    <ul class="unstyled">
+        <li ng-if="tmpCouleur==null || todo.couleur == tmpCouleur" ng-repeat="todo in todos">
+            <div class="item" ng-click="click(todo)" ng-dblclick="actionMenu(todo)" on-long-press="actionMenu(todo)"
+                 style="background-color: {{todo.couleur}}">
+                <div style="display: inline-flex ; width: 100%">
+                    <div style="width: inherit">
+                        <span class="done-{{todo.done}}">{{todo.text}}</span>
+                    </div>
+                    <div style="text-align: right ; width: min-content;">
+                        <span class="done-{{todo.done}}"><i
+                                class="material-icons" ng-if="todo.url">link</i></span>
+                    </div>
+                </div>
+                <div>
+                    <span class="done-{{todo.done}}">{{todo.description}}</span>
+                </div>
+                <div style="display: inline-flex ; width: 100%">
+                    <div>
+                        <span class="done-{{todo.done}}">{{todo.duree | date:'HH:mm'}}</span>
+                    </div>
+                    <div style="text-align: right ; width: 100%">
+                        <span class="done-{{todo.done}}">{{todo.date | date:'dd/MM/yyyy'}}</span>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<a class="btn-floating btn-large waves-effect waves-light red" ng-click="add()">
+    <i class="material-icons">add</i>
+</a>

@@ -1,0 +1,11 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "Todo List",
+  "short_name": "Todo List",
+  "version": "fr.ecobosto.ng.todoapp",
+  "description": "Une application de Todo List réalisée avec AngularJS et empaquetée avec Cordova.",
+  "author": "Gildas Garin-Hameline, Thomas Cloarec",
+  "icons": [],
+  "start_url": "www/index.html"
+}

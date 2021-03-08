@@ -1,0 +1,62 @@
+<!-- 
+    Ajouter une tache
+    Add.html
+-->
+
+<!-- Header -->
+<nav class="nav light-blue">
+    <div class="sidenav-trigger left text">
+        <a href="#/list"><i class="material-icons">arrow_back</i></a>
+    </div>
+    <a class="brand-logo center text" href="#">Todo List</a>
+</nav>
+
+<!-- Modal choix d'une couleur -->
+<div id="colorModal" class="modal modal-color">
+    <div class="modal-content">
+        <h4>Choisissez une couleur</h4>
+        <button class="btn black-text" ng-click="setCouleur(couleur);"
+                ng-repeat="couleur in couleurs"
+                style="margin: 2px;height: 32px; background-color:{{couleur}}">
+            <i class="material-icons smallIcon" ng-if="tmpCouleur==couleur">done</i>
+        </button>
+    </div>
+    <div class="modal-footer">
+        <a ng-click="toggleModal()" class="modal-close waves-effect waves-blue btn-flat">Ok</a>
+        <a ng-click="setCouleur(null); toggleModal();" class="modal-close waves-effect waves-blue btn-flat">Réinitialiser</a>
+    </div>
+</div>
+
+<!-- Contenu : formulaire -->
+<div class="container">
+    <form>
+        <h4 class="center" id="messageNote">Ajouter une nouvelle note</h4>
+
+        <label>
+            <input name="nom" ng-model="todoText" placeholder="Nom de la tache">
+        </label><br>
+        <label>
+            <textarea name="description" ng-model="todoDesc" class="materialize-textarea"
+                      placeholder="Description de la tâche"></textarea>
+        </label><br>
+        <label>
+            <input name="duree" ng-model="todoDuree" placeholder="Durée" type="time">
+        </label><br>
+        <label>
+            <input name="date" ng-model="todoDate" placeholder="Date" type="date">
+        </label><br>
+        <label>
+            <input name="url" ng-model="todoURL" placeholder="Lien vers une page web" type="url">
+        </label><br>
+        <label>
+            <button class="btn light-blue" ng-click="toggleModal()">
+                Choisir une couleur
+            </button>
+            <button class="btn black-text" ng-if="tmpCouleur"
+                    style="background-color:{{tmpCouleur}};margin: 2px;height: 32px">
+            </button>
+        </label><br><br>
+        <!-- Bouton de validation -->
+        <input class="btn light-blue" id="buttonAdd" ng-click="addValues()" type="submit" value="Ajouter">
+    </form>
+</div>

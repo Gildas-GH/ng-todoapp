@@ -1,5 +1,5 @@
 // Contrôleur d'ajout et de modification de tâches
-routeAppController.controller('addCtrl', ['$scope', '$cookies', '$window', function ($scope, $cookies, $window) {
+routeAppController.controller('addCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.couleurs = couleurs;
 
     var elem = document.querySelector('.modal');
@@ -48,7 +48,7 @@ routeAppController.controller('addCtrl', ['$scope', '$cookies', '$window', funct
         console.log("Remove..");
         try {
             // Lecture des cookies
-            let tmp = JSON.parse(decodeURIComponent(escape(window.atob($cookies.get('values')))));
+            let tmp = JSON.parse(localStorage.getItem('tasks'));
             let nb = 0;
 
             for (let i of tmp) {
@@ -59,8 +59,9 @@ routeAppController.controller('addCtrl', ['$scope', '$cookies', '$window', funct
                 nb++;
             }
             // Écriture dans les cookies
-            $cookies.put('values', window.btoa(unescape(encodeURIComponent(JSON.stringify(tmp)))));
-            tmp = JSON.parse(decodeURIComponent(escape(window.atob($cookies.get('values')))));
+            localStorage.setItem("tasks", JSON.stringify(tmp));
+            tmp = JSON.parse(localStorage.getItem('tasks'));
+
             $scope.todos = [];
             for (let i of tmp) {
                 $scope.todos.push(i);
@@ -85,7 +86,7 @@ routeAppController.controller('addCtrl', ['$scope', '$cookies', '$window', funct
 
         try {
             // Lecture des cookies
-            let tmp = JSON.parse(decodeURIComponent(escape(window.atob($cookies.get('values')))));
+            let tmp = JSON.parse(localStorage.getItem('tasks'));
             for (let i of tmp) {
                 tmptab.push(i);
             }
@@ -116,7 +117,7 @@ routeAppController.controller('addCtrl', ['$scope', '$cookies', '$window', funct
         }
 
         // Écriture dans les cookies
-        $cookies.put('values', window.btoa(unescape(encodeURIComponent(JSON.stringify(tmptab)))));
+        localStorage.setItem("tasks", JSON.stringify(tmptab));
 
         // Redirection vers le contrôleur de liste
         $window.location.href = '#/list';

@@ -1,5 +1,5 @@
 // Contrôleur de la liste de tâches (accueil)
-routeAppController.controller('listCtrl', ['$scope', '$cookies', '$window', function ($scope, $cookies, $window) {
+routeAppController.controller('listCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.couleurs = couleurs;
     $scope.tmpCouleur = null;
 
@@ -9,13 +9,9 @@ routeAppController.controller('listCtrl', ['$scope', '$cookies', '$window', func
     var elem = document.querySelector('.modal-color');
     $scope.colorModal = M.Modal.init(elem);
 
-    // Récupération des tâches enregistrées dans les cookies s'ils existent
+    // Récupération des tâches enregistrées dans le localStorage s'ils existent
     try {
-        let tmp = JSON.parse(decodeURIComponent(escape(window.atob($cookies.get('values')))));
-        $scope.todos = [];
-        for (let i of tmp) {
-            $scope.todos.push(i);
-        }
+        $scope.todos = JSON.parse(localStorage.getItem('tasks'));
     } catch (error) {
         $scope.todos = [];
     }
@@ -58,8 +54,8 @@ routeAppController.controller('listCtrl', ['$scope', '$cookies', '$window', func
     $scope.remove = function () {
         console.log("Remove..");
         try {
-            // Lecture des cookies déjà existants
-            let tmp = JSON.parse(decodeURIComponent(escape(window.atob($cookies.get('values')))));
+            // Lecture du localStorage déjà existant
+            let tmp = JSON.parse(localStorage.getItem('tasks'));
             let nb = 0;
 
             for (let i of tmp) {
@@ -71,14 +67,14 @@ routeAppController.controller('listCtrl', ['$scope', '$cookies', '$window', func
                 nb++;
             }
 
-            // Ré-écriture des cookies
-            $cookies.put('values', window.btoa(unescape(encodeURIComponent(JSON.stringify(tmp)))));
+            // Ré-écriture du localStorage
+            localStorage.setItem("tasks", JSON.stringify($scope.data));
 
             // Fermeture du modal
             $scope.actionMenu(tmpVal);
 
-            // Re-lecture des cookies
-            tmp = JSON.parse(decodeURIComponent(escape(window.atob($cookies.get('values')))));
+            // Re-lecture du localStorage
+            tmp = JSON.parse(localStorage.getItem('tasks'));
 
             $scope.todos = [];
             for (let i of tmp) {
@@ -93,15 +89,15 @@ routeAppController.controller('listCtrl', ['$scope', '$cookies', '$window', func
     $scope.click = function (todo) {
         todo.done = !todo.done;
         try {
-            // Lecture des cookies
-            let tmp = JSON.parse(decodeURIComponent(escape(window.atob($cookies.get('values')))));
+            // Lecture du localStorage
+            let tmp = JSON.parse(localStorage.getItem('tasks'));
             for (let i of tmp) {
                 if (i.id === todo.id) {
                     i.done = !i.done;
                 }
             }
-            // Écriture des cookies
-            $cookies.put('values', window.btoa(unescape(encodeURIComponent(JSON.stringify(tmp)))));
+            // Écriture du localStorage
+            localStorage.setItem("tasks", JSON.stringify(tmp));
         } catch (error) {
             console.log(error);
         }
